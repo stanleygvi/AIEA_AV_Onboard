@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 
-class DQN(nn.module):
+class DQN(nn.Module):
     def __init__(self, num_actions:int):
         super().__init__()
         self.features = nn.Sequential(
@@ -13,7 +13,7 @@ class DQN(nn.module):
                 nn.ReLU(),
             )
         with torch.no_grad():
-            x = torch.zeros(1, 4, 84, 84)
+            x = torch.zeros(1, 4, 84, 84) # input provided by φ (preprocessing function)
             n_flat = self.features(x).view(1, -1).size(1)
 
         self.head = nn.Sequential(
